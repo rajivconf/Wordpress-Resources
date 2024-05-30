@@ -1,0 +1,5 @@
+Id = get_the_ID();
+Parent Id = wp_get_post_parent_id(get_the_ID());
+Permalink = get_permalink( );
+Theme File Location = get_theme_file_uri('images/ocean.jpg');
+Site url = site_url();
