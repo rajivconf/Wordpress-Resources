@@ -1,1 +1,12 @@
+<script>
+jQuery(window).scroll(function(){
+if (jQuery(this).scrollTop() > 500) {
+jQuery('#backupthepage').fadeIn();
+jQuery('#backupthepage').addClass('showtoTp');
+} else {
+jQuery('#backupthepage').fadeOut();
+jQuery('#backupthepage').removeClass('showtoTop');
+}
+});
 
+</script>
