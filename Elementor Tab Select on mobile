@@ -1,0 +1,75 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Locate the main tabs container
+  var tabsContainer = document.querySelector('.e-n-tabs');
+  if (!tabsContainer) return;
+
+  // Get the existing tab headings container
+  var tabsHeading = tabsContainer.querySelector('.e-n-tabs-heading');
+  if (!tabsHeading) return;
+
+  // Get all tab buttons
+  var tabButtons = tabsHeading.querySelectorAll('.e-n-tab-title');
+  if (!tabButtons.length) return;
+
+  // Create a select element for mobile view
+  var mobileSelect = document.createElement('select');
+  mobileSelect.className = 'mobile-tab-select';
+
+  // Populate the select with options using the text and data attributes of the tab buttons
+  tabButtons.forEach(function(button) {
+    var option = document.createElement('option');
+    option.value = button.getAttribute('data-tab-index');
+    option.text = button.textContent.trim();
+    mobileSelect.appendChild(option);
+  });
+
+  // Insert the select box into the DOM (e.g., before the tab content)
+  var tabsContent = tabsContainer.querySelector('.e-n-tabs-content');
+  tabsContainer.insertBefore(mobileSelect, tabsContent);
+
+  // When the select changes, simulate clicking the corresponding tab button
+  mobileSelect.addEventListener('change', function() {
+    var selectedIndex = this.value;
+    tabButtons.forEach(function(button) {
+      if (button.getAttribute('data-tab-index') === selectedIndex) {
+        button.click();
+      }
+    });
+  });
+
+  // Optional: Update the select's value if a tab is activated by another method (e.g., keyboard navigation)
+  tabButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      mobileSelect.value = this.getAttribute('data-tab-index');
+    });
+  });
+});
+</script>
+
+// css
+
+/* Tabs On Dropdown On Mobile */
+@media (max-width: 768px) {
+  .e-n-tabs-heading {
+    display: none !important;
+  }
+  .mobile-tab-select {
+    display: block;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #888;
+}
+	select.mobile-tab-select option {
+    background: #777;
+    color: #fff;
+}
+	
+	select.mobile-tab-select:focus-visible{outline:none;}
+}
+
+@media (min-width: 769px) {
+  .mobile-tab-select {
+    display: none;
+  }
+}
